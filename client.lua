@@ -12,7 +12,7 @@ local isRotatingDown = false
 function DisplayDebugMessage(message)
     TriggerEvent(
         "chatMessage",
-        "[DEBUG]",
+        "[FiveCCTV | DEBUG]",
         { 255, 0, 0 },
         message
     )
@@ -129,7 +129,7 @@ end, false)
 RegisterCommand(
     "cctv",
     function()
-        DisplayDebugMessage("Opening CCTV")
+        DisplayDebugMessage("Opening login screen")
         SendNUIMessage({
             action = "show_login"
         })
@@ -138,46 +138,45 @@ RegisterCommand(
     false
 )
 
--- NUI Callback
+-- NUI Callbacks
 RegisterNUICallback("closeCamera", function(data, cb)
     cameraActive = false
     DestroyCamera()
+    DisplayDebugMessage("Closing camera view")
     cb("ok")
 end)
 
 RegisterNUICallback(
     "validateLogin",
     function(data, cb)
-        local ip = data.ip
-        local user = data.user
-        local password = data.password
-        local cam_data = GetCam(ip)
-        if cam_data then
-            if cam_data.cam_user == user and cam_data.cam_passwd == password then
-                cameraActive = true
-                local coords = { x = cam_data.x, y = cam_data.y, z = cam_data.z, heading = cam_data.heading }
-                local cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
-                SetCamCoord(cam, coords.x, coords.y, coords.z)
-                SetCamRot(cam, 0.0, 0.0, coords.heading, 0)
-                SetCamActive(cam, true)
-                RenderScriptCams(true, false, 1, true, true)
-                cameraEntity = cam
-                DisplayDebugMessage("Camera created; opening camera_view")
+        DisplayDebugMessage("Validating login")
+        -- print("Data: " .. json.encode(data))
+        -- local ip = data.ip
+        -- local user = data.user
+        -- local password = data.password
+        -- local cam_data = GetCam(ip)
+        -- DisplayDebugMessage("IP: " .. ip .. " User: " .. user .. " Password: " .. password)
+        -- DisplayDebugMessage("Cam data: " .. json.encode(cam_data))
+        -- if cam_data then
+        --     if cam_data.cam_user == user and cam_data.cam_passwd == password then
+        --         cameraActive = true
+        --         local coords = { x = cam_data.x, y = cam_data.y, z = cam_data.z, heading = cam_data.heading }
+        --         CreateCamera(coords)
+        --         DisplayDebugMessage("Camera created; opening camera_view")
 
-                cb("true")
-            else
-                cb("false")
-            end
-        else
-            cb("false")
-        end
-    end
-)
-
-RegisterNUICallback(
-    "JSDebug",
-    function(data, cb)
-        DisplayDebugMessage(data.message)
-        cb("ok")
+        --         cb("true")
+        --     else
+        --         -- SendNUIMessage({
+        --         --     action = "hide_login",
+        --         -- })
+        --         cb("false")
+        --     end
+        -- else
+        --     SetNuiFocus(false, false)
+        --     SendNUIMessage({
+        --         action = "hide_login",
+        --     })
+        --     cb("false")
+        -- end
     end
 )

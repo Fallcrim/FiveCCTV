@@ -4,21 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camera View</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="error">
-    </div>
-    <!-- <div id="cameraView" style="position: relative; top: 0; left: 0; width: 100%; height: 100%; display: none;">
+    <div id="error"></div>
+    <div id="cameraView" style="position: relative; top: 0; left: 0; width: 100%; height: 100%; display: none;">
     </div>
     <div class="login-container" id="login-container">
         <h2>Login</h2>
-        <input type="text" class="login-input" placeholder="IP Address">
-        <input type="text" class="login-input" placeholder="Username">
-        <input type="password" class="login-input" placeholder="Password">
-        <button type="submit" class="login-button">Login</button>
-    </div> -->
+        <input type="text" class="login-input" placeholder="IP Address" id="ip">
+        <input type="text" class="login-input" placeholder="Username" id="username">
+        <input type="password" class="login-input" placeholder="Password" id="password">
+        <button type="submit" class="login-button" id="login-button">Login</button>
+    </div>
 </body>
 </html>
 
@@ -33,18 +31,6 @@
         align-items: center;
         min-height: 100vh;
     }
-
-    #error {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 90px;
-        background-color: #ff0000;
-        color: #fff;
-        text-align: center;
-        /* display: none; */
-    }
   
     .login-container {
         background-color: #fff;
@@ -58,6 +44,8 @@
         left: 0;
         height: 30%;
         display: none;
+        margin-right: 0;
+        margin-left: auto;
     }
   
     .login-container h2 {
@@ -87,3 +75,5 @@
         background-color: #2980b9;
     }
 </style>
+
+<script src="./script.js" type="text/javascript"></script>

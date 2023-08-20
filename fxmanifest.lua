@@ -1,6 +1,8 @@
 fx_version "cerulean"
 game "gta5"
 
+name "FiveCCTV"
+
 author "Fallcrim"
 description "A simple script to add CCTV functionality"
 
@@ -15,3 +17,5 @@ files {
     "html/index.html",
     "html/script.js",
 }
+
+lua54 'yes'
